@@ -132,3 +132,126 @@ function getTemOfTmrw(avgTemperatures) {
     return tempOfTomorrow;
 }
 console.log(getTempOfTmrw(AVG_TEMPERATURES));
+
+//destructive assignment with nested objects
+const LOCAL_FORECAST = {
+    today: { min: 72, max: 83},
+    tomorrow: { min: 73.3, max: 84.6 }
+};
+
+function getMaxOfTmrw(forecast) {
+    "use strict";
+    const { tomorrow : { max : maxOfTomorrow }} = forecast;
+    return maxOfTomorrow;
+}
+console.log(getMaxOfTmrw(LOCAL_FORECAST));
+
+//use destructuring assignment to assign variables from array
+const [z, x, , y] = [1, 2, 3, 4, 5, 6];
+console.log(z, x, y);
+
+let a = 8, b = 6;
+(() => {
+    "use strict";
+    [a, b] = [b, a]
+})();
+console.log(a);
+console.log(b);
+
+// use destruncturing assignment with the rest operator
+const source = [1,2,3,4,5,6,7,8,9,10];
+function removeFirstTwo(list) {
+    const [ , , ...arr] = list;
+    return arr;
+}
+const arr = removeFirstTwo(source);
+console.log(arr);
+console.log(source);
+
+//using destructuring to redeclare an object as a functions parameter
+const stats = {
+    max: 56.78,
+    standard_deviation: 4.34,
+    median: 34.54,
+    mode: 23.87,
+    min: -0.75,
+    average: 35.85
+};
+const half = (function() {
+    return function half({ max, min}) {
+        return (max + min) / 2.0;
+    };
+})();
+console.log(stats);
+console.log(half(stats));
+
+//functio
+const createPerson = (name, age, gender) => ( { name, age, gender});
+console.log(createPerson("Zodiac Hasbro", 56, "male"));
+
+//use class syntax to define a constructor function
+//old way to create an object
+var SpaceShuttle = function(targetPlanet){
+    this.targetPlanet = targetPlanet;
+}
+var zeus = new SpaceShuttle('Jupiter');
+console.log(zeus.targetPlanet)
+//using the class syntax to replace the constructor
+class SpaceShuttle {
+    constructor(targetPlanet) {
+        this.targetPlanet = targetPlanet;
+    }
+}
+var zeus = new SpaceShuttle('Jupiter');
+console.log(zeus.targetPlanet)
+//example
+function makeClass() {
+    class Vegetable {
+        constructor(name){
+            this.name = name;
+        }
+    }
+    return Vegetable;
+}
+const Vegetable = makeClass();
+const carrot = new Vegetable('carrot');
+console.log(carrot.name);
+
+
+
+// use getters and setters to control Acces to an object
+class Book {
+    constructor(author) {
+        this._author = author;
+    }
+    // getter
+    get writer() {
+        return this._author;
+    }
+    // setter
+    set writer(updatedAuthor){
+        this._author = updatedAuthor;
+    }
+}
+//new example
+function makeClass() {
+    class Thermostat {
+        constructor(temp) {
+            this._temp = 5/9 * (temp - 32);
+        }
+        get temperature(){
+            return this._temp;
+        }
+        set temperature(updatedTemp){
+            this._temp = updatedTemp;
+        }
+    }
+    return Thermostat;
+}
+
+const Thermostat = makeClass();
+const thermos = new Thermostat(76);
+let temp = thermos.temperature;
+thermos.temperature = 26;
+temp = thermos.temperature;
+console.log(temp);

@@ -81,3 +81,10 @@ function randomWholeNum() {
     return Math.floor(Math.random() * 10);
 }
 console.log(randomWholeNum());
+
+// generating random whole numbers between a range
+function ourRandomRange(ourMin, ourMax) {
+    return Math.floor(Math.random() * (ourMax - ourMin + 1)) + ourMin;
+}
+
+ourRandomRange(1, 9);
